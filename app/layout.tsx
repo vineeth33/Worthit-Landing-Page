@@ -1,9 +1,9 @@
-import type React from "react"
-import type { Metadata } from "next"
-import { Inter } from "next/font/google"
-import "./globals.css"
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import type React from "react";
+import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] })
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "WorthIt - Smart Shopping Assistant | Make Better Buying Decisions",
@@ -45,17 +45,24 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-    generator: 'v0.dev'
-}
+  generator: "v0.dev",
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
+      <head>
+        {/* Manual meta tag for Google verification */}
+        <meta
+          name="google-site-verification"
+          content="dBQfs8K--N4ifLKaxoSGuqtlA9BLNN0cSGeG8TwbojA"
+        />
+      </head>
       <body className={inter.className}>{children}</body>
     </html>
-  )
+  );
 }
