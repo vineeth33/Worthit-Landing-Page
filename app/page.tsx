@@ -1,23 +1,23 @@
 "use client"
-
-import { useState, useEffect } from "react"
-import Image from "next/image"
 import {
   ArrowRight,
-  Chrome,
-  Shield,
-  TrendingUp,
-  Download,
-  Play,
-  CheckCircle,
   BarChart3,
-  Clock,
-  ShoppingBag,
-  Heart,
-  Zap,
-  Target,
   Brain,
+  CheckCircle,
+  Chrome,
+  Clock,
+  Download,
+  Heart,
+  Play,
+  Shield,
+  ShoppingBag,
+  Target,
+  TrendingUp,
+  Zap,
 } from "lucide-react"
+import Image from "next/image"
+import Link from "next/link"
+import { useEffect, useState } from "react"
 
 export default function LandingPage() {
   const [isVisible, setIsVisible] = useState(false)
@@ -279,9 +279,8 @@ export default function LandingPage() {
             {features.map((feature, index) => (
               <div
                 key={index}
-                className={`bg-white rounded-2xl p-8 shadow-lg border border-slate-200 hover:shadow-xl transition-all duration-300 ${
-                  activeFeature === index ? "ring-2 ring-blue-500 ring-opacity-50" : ""
-                }`}
+                className={`bg-white rounded-2xl p-8 shadow-lg border border-slate-200 hover:shadow-xl transition-all duration-300 ${activeFeature === index ? "ring-2 ring-blue-500 ring-opacity-50" : ""
+                  }`}
               >
                 <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-2xl flex items-center justify-center text-white mb-6">
                   {feature.icon}
@@ -457,7 +456,7 @@ export default function LandingPage() {
               <h3 className="font-semibold mb-4">Company</h3>
               <div className="space-y-2 text-slate-400">
                 <div>About</div>
-                <div>Privacy Policy</div>
+                <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
                 <div>Terms of Service</div>
                 <div>Open Source</div>
               </div>
