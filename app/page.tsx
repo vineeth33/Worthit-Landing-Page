@@ -89,10 +89,16 @@ export default function LandingPage() {
               <a href="#benefits" className="text-slate-600 hover:text-blue-600 transition-colors">
                 Benefits
               </a>
-              <button className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-2 rounded-full hover:shadow-lg transition-all duration-300 flex items-center space-x-2">
+              <a
+                href="https://chromewebstore.google.com/detail/pjejfmpjhkdfbbbmdanfkdbdmighijof?utm_source=item-share-cb"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-2 rounded-full hover:shadow-lg transition-all duration-300 flex items-center space-x-2"
+              >
                 <Chrome className="w-4 h-4" />
                 <span>Add to Chrome</span>
-              </button>
+              </a>
+
             </div>
           </div>
         </div>
@@ -121,11 +127,17 @@ export default function LandingPage() {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <button className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-4 rounded-full hover:shadow-xl transition-all duration-300 flex items-center justify-center space-x-3 text-lg font-semibold">
+                <a
+                  href="https://chromewebstore.google.com/detail/pjejfmpjhkdfbbbmdanfkdbdmighijof?utm_source=item-share-cb"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-white text-blue-600 px-8 py-4 rounded-full hover:shadow-xl transition-all duration-300 flex items-center justify-center space-x-3 text-lg font-semibold"
+                >
                   <Chrome className="w-6 h-6" />
                   <span>Add to Chrome - Free</span>
                   <ArrowRight className="w-5 h-5" />
-                </button>
+                </a>
+
                 <button className="border-2 border-slate-300 text-slate-700 px-8 py-4 rounded-full hover:border-blue-600 hover:text-blue-600 transition-all duration-300 flex items-center justify-center space-x-3 text-lg font-semibold">
                   <Play className="w-5 h-5" />
                   <span>Watch Demo</span>
@@ -382,14 +394,19 @@ export default function LandingPage() {
               Join the smart shopping revolution. Make better decisions with every purchase.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-white text-blue-600 px-8 py-4 rounded-full hover:shadow-xl transition-all duration-300 flex items-center justify-center space-x-3 text-lg font-semibold">
+              <a
+                href="https://chromewebstore.google.com/detail/pjejfmpjhkdfbbbmdanfkdbdmighijof?utm_source=item-share-cb"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-4 rounded-full hover:shadow-xl transition-all duration-300 flex items-center justify-center space-x-3 text-lg font-semibold"
+              >
                 <Chrome className="w-6 h-6" />
                 <span>Add to Chrome - Free</span>
                 <ArrowRight className="w-5 h-5" />
-              </button>
+              </a>
               <button className="border-2 border-white text-white px-8 py-4 rounded-full hover:bg-white hover:text-blue-600 transition-all duration-300 flex items-center justify-center space-x-3 text-lg font-semibold">
                 <Heart className="w-5 h-5" />
-                <span>Learn More</span>
+                <span><Link href="/privacy" className="hover:text-white transition-colors">Learn More</Link></span>
               </button>
             </div>
             <div className="flex items-center justify-center space-x-8 pt-8">
@@ -456,7 +473,9 @@ export default function LandingPage() {
               <h3 className="font-semibold mb-4">Company</h3>
               <div className="space-y-2 text-slate-400">
                 <div>About</div>
-                <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+                <div>
+                  <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+                </div>
                 <div>Terms of Service</div>
                 <div>Open Source</div>
               </div>
@@ -464,7 +483,7 @@ export default function LandingPage() {
           </div>
 
           <div className="border-t border-slate-800 mt-12 pt-8 flex flex-col sm:flex-row justify-between items-center">
-            <div className="text-slate-400">© 2024 WorthIt. All rights reserved.</div>
+            <div className="text-slate-400">© 2025 WorthIt. All rights reserved.</div>
             <div className="flex items-center space-x-6 mt-4 sm:mt-0">
               <div className="text-slate-400 hover:text-white cursor-pointer">Twitter</div>
               <div className="text-slate-400 hover:text-white cursor-pointer">GitHub</div>

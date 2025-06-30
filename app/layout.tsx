@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "WorthIt - Smart Shopping Assistant",
     description: "Make smarter buying decisions with AI-powered cost analysis",
-    url: "https://worthit-extension.com",
+    url: "https://chromewebstore.google.com/detail/pjejfmpjhkdfbbbmdanfkdbdmighijof?utm_source=item-share-cb",
     siteName: "WorthIt",
     images: [
       {
