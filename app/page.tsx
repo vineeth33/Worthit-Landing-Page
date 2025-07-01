@@ -452,8 +452,14 @@ export default function LandingPage() {
             <div>
               <h3 className="font-semibold mb-4">Product</h3>
               <div className="space-y-2 text-slate-400">
-                <div>Features</div>
-                <div>How it Works</div>
+                <a href="#features">
+                  <div>Features</div>
+                </a>
+                <div>
+                  <a href="#how-it-works">
+                    <div>How it Works</div>
+                  </a>
+                </div>
                 <div>Supported Sites</div>
                 <div>Roadmap</div>
               </div>
@@ -462,12 +468,39 @@ export default function LandingPage() {
             <div>
               <h3 className="font-semibold mb-4">Support</h3>
               <div className="space-y-2 text-slate-400">
-                <div>Help Center</div>
-                <div>Contact Us</div>
-                <div>Bug Reports</div>
-                <div>Feature Requests</div>
+                <div>
+                  <Link href="/help-center" className="hover:text-white transition-colors">Help Center</Link>
+                </div>
+                <div>
+                  <a
+                    href="https://vineethportfolio-omega.vercel.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <div className="hover:text-slate-600 cursor-pointer">Contact Us</div>
+                  </a>
+                </div>
+                <div>
+                  <a
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSdTlykK8bWHFSKUI7Jk-_y5xLW5S7gYI69SgsQNczVrIVLoTw/viewform?usp=sharing&ouid=113991419266563621469"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <div className="hover:text-slate-600 cursor-pointer">Bug Reports</div>
+                  </a>
+                </div>
+                <div>
+                  <a
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSdTlykK8bWHFSKUI7Jk-_y5xLW5S7gYI69SgsQNczVrIVLoTw/viewform?usp=sharing&ouid=113991419266563621469"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <div className="hover:text-slate-600 cursor-pointer">Feature Requests</div>
+                  </a>
+                </div>
               </div>
             </div>
+
 
             <div>
               <h3 className="font-semibold mb-4">Company</h3>
