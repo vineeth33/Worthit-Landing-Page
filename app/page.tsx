@@ -209,7 +209,6 @@ export default function LandingPage() {
                 </a>
               </div>
 
-
               <div className="flex items-center space-x-8 pt-4">
                 <div className="flex items-center space-x-2">
                   <CheckCircle className="w-5 h-5 text-green-500" />
@@ -260,7 +259,7 @@ export default function LandingPage() {
                             fill="none"
                             strokeLinecap="round"
                             strokeDasharray="188"
-                            strokeDashoffset={188 - (risk / 100) * 188} // Dynamic strokeDashoffset based on risk
+                            strokeDashoffset={188 - (risk / 100) * 188}
                             className="transition-all duration-1000"
                           />
                           <defs>
@@ -314,6 +313,50 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* Demo Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white/50 backdrop-blur-sm">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center space-y-4 mb-12">
+            <h2 className="text-4xl lg:text-5xl font-bold text-slate-900">
+              See WorthIt in Action
+            </h2>
+            <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+              Watch our interactive demo to explore how WorthIt’s version 1.1 helps you shop smarter with real-time cost-per-use insights and impulse control tools.
+            </p>
+          </div>
+          <div className="bg-white rounded-2xl p-8 shadow-lg border border-slate-200">
+            <div
+              style={{
+                position: "relative",
+                paddingBottom: "calc(54.285714285714285% + 41px)",
+                height: 0,
+                width: "100%",
+              }}
+            >
+              <iframe
+                src="https://demo.arcade.software/Len6Yz5DCD6pcBk35pqk?embed&embed_mobile=tab&embed_desktop=inline&show_copy_link=true"
+                title="WorthIt Demo"
+                frameBorder="0"
+                loading="lazy"
+                webkitAllowFullScreen
+                mozAllowFullScreen
+                allowFullScreen
+                allow="clipboard-write"
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%",
+                  colorScheme: "light",
+                  borderRadius: "1rem",
+                }}
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Value Proposition Section */}
       <section className="py-16 bg-white/50 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -356,8 +399,7 @@ export default function LandingPage() {
             {features.map((feature, index) => (
               <div
                 key={index}
-                className={`bg-white rounded-2xl p-8 shadow-lg border border-slate-200 hover:shadow-xl transition-all duration-300 ${activeFeature === index ? "ring-2 ring-blue-500 ring-opacity-50" : ""
-                  }`}
+                className={`bg-white rounded-2xl p-8 shadow-lg border border-slate-200 hover:shadow-xl transition-all duration-300 ${activeFeature === index ? "ring-2 ring-blue-500 ring-opacity-50" : ""}`}
               >
                 <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-2xl flex items-center justify-center text-white mb-6">
                   {feature.icon}
