@@ -17,55 +17,92 @@ import {
 } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 
 export default function LandingPage() {
   const [isVisible, setIsVisible] = useState(false)
   const [activeFeature, setActiveFeature] = useState(0)
+  const [currency, setCurrency] = useState("INR") // Default to INR
 
   useEffect(() => {
     setIsVisible(true)
     const interval = setInterval(() => {
       setActiveFeature((prev) => (prev + 1) % 3)
     }, 3000)
+    // Load currency preference from localStorage
+    const savedCurrency = localStorage.getItem("currency") || "INR"
+    setCurrency(savedCurrency)
     return () => clearInterval(interval)
   }, [])
 
-  const features = [
-    {
-      icon: <BarChart3 className="w-8 h-8" />,
-      title: "Smart Cost Analysis",
-      description: "AI-powered cost-per-use calculations help you understand the real value of every purchase.",
-    },
-    {
-      icon: <Clock className="w-8 h-8" />,
-      title: "Time-to-Afford Metrics",
-      description: "See exactly how many work hours or days it takes to afford any item based on your income.",
-    },
-    {
-      icon: <Shield className="w-8 h-8" />,
-      title: "Impulse Control",
-      description: "Built-in purchase delays and smart recommendations help you avoid regrettable buying decisions.",
-    },
-  ]
+  useEffect(() => {
+    // Save currency preference to localStorage
+    localStorage.setItem("currency", currency)
+  }, [currency])
 
-  const benefits = [
-    {
-      icon: <Target className="w-6 h-6" />,
-      title: "Make Informed Decisions",
-      description: "Never wonder if a purchase is worth it again with clear, data-driven insights.",
-    },
-    {
-      icon: <Brain className="w-6 h-6" />,
-      title: "Reduce Buyer's Remorse",
-      description: "Smart analysis helps you avoid purchases you'll regret later.",
-    },
-    {
-      icon: <Zap className="w-6 h-6" />,
-      title: "Save Money Effortlessly",
-      description: "Automatic calculations help you identify truly valuable purchases.",
-    },
-  ]
+  const formatMetrics = () => {
+    const basePrice = 45 // INR
+    const baseRisk = 42 // Risk score in INR
+    const baseTime = 5 // Days in INR
+    const conversionRate = 0.012 // 1 INR = 0.012 USD
+
+    if (currency === "USD") {
+      return {
+        price: `$${(basePrice * conversionRate).toFixed(2)}`,
+        risk: Math.round(baseRisk * conversionRate * 10), // Scale risk for USD (illustrative)
+        time: "1 day", // Adjusted to ~1 day as specified
+      }
+    }
+    return {
+      price: `₹${basePrice.toFixed(2)}`,
+      risk: baseRisk,
+      time: `${baseTime} days`,
+    }
+  }
+
+  const { price, risk, time } = formatMetrics()
+
+  const features = useMemo(
+    () => [
+      {
+        icon: <BarChart3 className="w-8 h-8" />,
+        title: "Smart Cost Analysis",
+        description: "AI-powered cost-per-use calculations help you understand the real value of every purchase.",
+      },
+      {
+        icon: <Clock className="w-8 h-8" />,
+        title: "Time-to-Afford Metrics",
+        description: "See exactly how many work hours or days it takes to afford any item based on your income.",
+      },
+      {
+        icon: <Shield className="w-8 h-8" />,
+        title: "Impulse Control",
+        description: "Built-in purchase delays and smart recommendations help you avoid regrettable buying decisions.",
+      },
+    ],
+    []
+  )
+
+  const benefits = useMemo(
+    () => [
+      {
+        icon: <Target className="w-6 h-6" />,
+        title: "Make Informed Decisions",
+        description: "Never wonder if a purchase is worth it again with clear, data-driven insights.",
+      },
+      {
+        icon: <Brain className="w-6 h-6" />,
+        title: "Reduce Buyer's Remorse",
+        description: "Smart analysis helps you avoid purchases you'll regret later.",
+      },
+      {
+        icon: <Zap className="w-6 h-6" />,
+        title: "Save Money Effortlessly",
+        description: "Automatic calculations help you identify truly valuable purchases.",
+      },
+    ],
+    []
+  )
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
@@ -79,7 +116,7 @@ export default function LandingPage() {
               </div>
               <span className="text-xl font-bold text-slate-900">WorthIt</span>
             </div>
-            <div className="hidden md:flex items-center space-x-8">
+            <div className="flex items-center space-x-4 md:space-x-8">
               <a href="#features" className="text-slate-600 hover:text-blue-600 transition-colors">
                 Features
               </a>
@@ -89,6 +126,28 @@ export default function LandingPage() {
               <a href="#benefits" className="text-slate-600 hover:text-blue-600 transition-colors">
                 Benefits
               </a>
+              <div className="relative">
+                <select
+                  value={currency}
+                  onChange={(e) => setCurrency(e.target.value)}
+                  className="appearance-none bg-white text-slate-900 text-sm font-medium rounded-full px-4 py-2 border border-slate-200 hover:border-blue-600 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 transition-all duration-200 shadow-sm hover:shadow-md cursor-pointer pr-8"
+                  aria-label="Select currency"
+                >
+                  <option value="INR">INR</option>
+                  <option value="USD">USD</option>
+                </select>
+                <div className="absolute inset-y-0 right-2 flex items-center pointer-events-none">
+                  <svg
+                    className="w-4 h-4 text-slate-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
+              </div>
               <a
                 href="https://chromewebstore.google.com/detail/pjejfmpjhkdfbbbmdanfkdbdmighijof?utm_source=item-share-cb"
                 target="_blank"
@@ -98,12 +157,10 @@ export default function LandingPage() {
                 <Chrome className="w-4 h-4" />
                 <span>Add to Chrome</span>
               </a>
-
             </div>
           </div>
         </div>
       </nav>
-
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
@@ -112,18 +169,21 @@ export default function LandingPage() {
               <div className="space-y-4">
                 <div className="inline-flex items-center space-x-2 bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium">
                   <Zap className="w-4 h-4" />
-                  <span>New Chrome Extension</span>
+                  <span>Version 1.1 Now Live</span>
                 </div>
-                <h1 className="text-5xl lg:text-6xl font-bold text-slate-900 leading-tight">
-                  Shop Smarter with
-                  <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent block">
-                    AI-Powered Analysis
-                  </span>
-                </h1>
-                <p className="text-xl text-slate-600 leading-relaxed">
-                  Make better buying decisions with real-time cost-per-use calculations, time-to-afford metrics, and
-                  smart impulse control features. Built specifically for Indian shoppers.
-                </p>
+                <div>
+                  <h1 className="text-5xl lg:text-6xl font-bold text-slate-900 leading-tight">
+                    Shop Smarter with
+                    <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent block">
+                      Smart Analysis
+                    </span>
+                  </h1>
+                </div>
+                <div>
+                  <p className="text-xl text-slate-600 leading-relaxed">
+                    Version 1.1 is here — featuring a sleek new UI, essential bug fixes from user feedback, and USD currency support for global shoppers. Experience smarter shopping with real-time cost-per-use insights, time-to-afford analysis, and intelligent impulse control tools — now more powerful and personalized than ever.
+                  </p>
+                </div>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
@@ -163,7 +223,7 @@ export default function LandingPage() {
             <div className={`relative ${isVisible ? "animate-fade-in-right" : "opacity-0"}`}>
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-3xl blur-3xl opacity-20"></div>
-                <div className="relative bg-white rounded-3xl shadow-2xl p-8 border border-slate-200">
+                <div className="relative bg-white rounded-3xl p-8 border border-green-400 shadow-[0_0_8px_rgba(34,197,94,0.25)]">
                   <div className="space-y-6">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-3">
@@ -194,7 +254,7 @@ export default function LandingPage() {
                             fill="none"
                             strokeLinecap="round"
                             strokeDasharray="188"
-                            strokeDashoffset="75"
+                            strokeDashoffset={188 - (risk / 100) * 188} // Dynamic strokeDashoffset based on risk
                             className="transition-all duration-1000"
                           />
                           <defs>
@@ -207,7 +267,7 @@ export default function LandingPage() {
                         </svg>
                         <div className="absolute inset-0 flex items-center justify-center">
                           <div className="text-center">
-                            <div className="text-lg font-bold text-slate-900">42</div>
+                            <div className="text-lg font-bold text-slate-900">{risk}</div>
                             <div className="text-xs text-slate-500">Risk</div>
                           </div>
                         </div>
@@ -216,11 +276,11 @@ export default function LandingPage() {
                       <div className="space-y-3 flex-1">
                         <div className="flex justify-between items-center bg-slate-50 rounded-lg p-3">
                           <span className="text-sm text-slate-600">Cost/use</span>
-                          <span className="font-semibold text-slate-900">₹45.00</span>
+                          <span className="font-semibold text-slate-900">{price}</span>
                         </div>
                         <div className="flex justify-between items-center bg-slate-50 rounded-lg p-3">
                           <span className="text-sm text-slate-600">Time</span>
-                          <span className="font-semibold text-slate-900">5 days</span>
+                          <span className="font-semibold text-slate-900">{time}</span>
                         </div>
                         <div className="flex justify-between items-center bg-slate-50 rounded-lg p-3">
                           <span className="text-sm text-slate-600">Uses</span>
@@ -254,8 +314,7 @@ export default function LandingPage() {
           <div className="text-center space-y-4 mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-slate-900">Why WorthIt?</h2>
             <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Stop wondering if your purchases are worth it. Get instant, data-driven insights for every shopping
-              decision.
+              Stop wondering if your purchases are worth it. Get instant, data-driven insights for every shopping decision. Version 1.1 includes USD support and improved reliability.
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
@@ -283,7 +342,7 @@ export default function LandingPage() {
               </span>
             </h2>
             <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-              Everything you need to make informed purchasing decisions and avoid buyer's remorse.
+              Everything you need to make informed purchasing decisions and avoid buyer's remorse. Now enhanced in version 1.1.
             </p>
           </div>
 
@@ -311,7 +370,7 @@ export default function LandingPage() {
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-4xl lg:text-5xl font-bold text-slate-900">How WorthIt Works</h2>
             <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-              Get started in minutes and start making smarter purchases immediately.
+              Get started in minutes and start making smarter purchases immediately with version 1.1’s improved performance.
             </p>
           </div>
 
@@ -332,7 +391,7 @@ export default function LandingPage() {
               {
                 step: "03",
                 title: "Make Smart Decisions",
-                description: "See instant analysis with cost-per-use, time-to-afford, and risk scoring.",
+                description: "See instant analysis with cost-per-use, time-to-afford, and risk scoring in INR or USD.",
                 icon: <TrendingUp className="w-8 h-8" />,
               },
             ].map((step, index) => (
@@ -364,7 +423,7 @@ export default function LandingPage() {
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-4xl lg:text-5xl font-bold text-slate-900">Works Where You Shop</h2>
             <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-              Currently supports India's most popular shopping platforms, with more coming soon.
+              Currently supports India's most popular shopping platforms, with more coming soon. Version 1.1 enhances compatibility.
             </p>
           </div>
 
@@ -391,7 +450,7 @@ export default function LandingPage() {
           <div className="space-y-8">
             <h2 className="text-4xl lg:text-5xl font-bold text-white">Start Shopping Smarter Today</h2>
             <p className="text-xl text-blue-100 leading-relaxed">
-              Join the smart shopping revolution. Make better decisions with every purchase.
+              Join the smart shopping revolution with version 1.1, featuring USD support, enhanced UI, and bug fixes for a seamless experience.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
@@ -445,7 +504,7 @@ export default function LandingPage() {
                 <span className="text-xl font-bold">WorthIt</span>
               </div>
               <p className="text-slate-400 leading-relaxed">
-                Making online shopping smarter with AI-powered purchase analysis.
+                Making online shopping smarter with AI-powered purchase analysis. Version 1.1 includes USD support, enhanced UI, and bug fixes.
               </p>
             </div>
 
@@ -455,11 +514,9 @@ export default function LandingPage() {
                 <a href="#features">
                   <div>Features</div>
                 </a>
-                <div>
-                  <a href="#how-it-works">
-                    <div>How it Works</div>
-                  </a>
-                </div>
+                <a href="#how-it-works">
+                  <div>How it Works</div>
+                </a>
                 <div>Supported Sites</div>
                 <div>Roadmap</div>
               </div>
@@ -500,7 +557,6 @@ export default function LandingPage() {
                 </div>
               </div>
             </div>
-
 
             <div>
               <h3 className="font-semibold mb-4">Company</h3>
