@@ -198,11 +198,17 @@ export default function LandingPage() {
                   <ArrowRight className="w-5 h-5" />
                 </a>
 
-                <button className="border-2 border-slate-300 text-slate-700 px-8 py-4 rounded-full hover:border-blue-600 hover:text-blue-600 transition-all duration-300 flex items-center justify-center space-x-3 text-lg font-semibold">
+                <a
+                  href="https://youtu.be/Jfvj7QE3aDo"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="border-2 border-slate-300 text-slate-700 px-8 py-4 rounded-full hover:border-blue-600 hover:text-blue-600 transition-all duration-300 flex items-center justify-center space-x-3 text-lg font-semibold"
+                >
                   <Play className="w-5 h-5" />
                   <span>Watch Demo</span>
-                </button>
+                </a>
               </div>
+
 
               <div className="flex items-center space-x-8 pt-4">
                 <div className="flex items-center space-x-2">
